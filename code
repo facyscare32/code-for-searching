@@ -1,0 +1,28 @@
+import requests
+
+def get_last_update_time(game_id):
+    url = f"https://api.coingecko.com/api/v3/coins/{game_id}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        last_update_timestamp = data['last_updated']
+        last_update_time = convert_timestamp_to_datetime(last_update_timestamp)
+        return last_update_time
+    else:
+        return None
+
+def convert_timestamp_to_datetime(timestamp):
+    # Implement your own logic to convert timestamp to datetime format
+    # This will depend on the format of the timestamp returned by the API
+    # You can use the datetime module or other libraries for the conversion
+    pass
+
+# Example usage
+game_id = 'crypto-game-id'  # Replace with the actual game ID
+last_update_time = get_last_update_time(game_id)
+
+if last_update_time:
+    print(f"The last update time for the game is: {last_update_time}")
+else:
+    print("Failed to retrieve the last update time")
